@@ -9,8 +9,8 @@ def fact(n):
 def filter_even(l):
     return list(filter(lambda x: x % 2 == 0, l))
 #3 
-def square(list):
-    res = [i**2 for i in map(int, list.split())]
+def square(li):
+    return list(map(lambda x: x ** 2, li))
     return res
 #4 
 def bin_search(list, n):
@@ -27,23 +27,18 @@ def bin_search(list, n):
     return -1
 #5
 
-def is_palindrome(x):
- x = len(word)
- i = 0
- x = x - 1
- k = 0
- while x - i >= i:
-      if word[x - i] == word[i]:
-          i += 1
-      else:
-          k = 1
-          break
- if k == 1:
-    print("no")
- else:
-    print("yes")
+def is_palindrome(string):
+    string = ''.join(filter(lambda x: x.isalpha(), string))
+    start = 0
+    finish = len(string) - 1
+    while start != len(string) // 2:
+        if string[start].lower() != string[finish].lower():
+            return "NO"
+        start += 1
+        finish -= 1
+    return "YES"
 
-# 6
+#6
 OPS = {'+': lambda x, y: x + y, '-': lambda x, y: x - y,
        '*': lambda x, y: x * y, '//': lambda x, y: x // y,
        '%': lambda x, y: x % y, '**': lambda x, y: x ** y}
