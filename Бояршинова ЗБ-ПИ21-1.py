@@ -1,18 +1,18 @@
-#Напишите **рекурсивную** функцию ```fact```, которая вычисляет факториал заданного числа ```x```.
+#1
 def fact(n):
     if (n <= 1):
         return 1
     else:
         return (n * fact(n-1))
 
-#2 Создайте функцию ```filter_even```, которая принимает на вход список целых чисел,  и фильтруя, возвращает список, содержащий только четные числа. Используйте ```filter``` для фильтрации и  ```lambda```.
+#2 
 def filter_even(l):
     return list(filter(lambda x: x % 2 == 0, l))
-#3 Напишите функцию ```square``` ,которая принимает на вход список целых чисел и возвращает список с возведенными в квадрат элементами. Используйте ```map```.
+#3 
 def square(list):
     res = [i**2 for i in map(int, list.split())]
     return res
-#4 Напишите функцию бинарного поиска ```bin_search```, которая принимает на вход отсортированный список и элемент. Функция должна возвращать индекс искомого элемента в списке. 
+#4 
 def bin_search(list, n):
     start = 0
     end = len(list)
@@ -25,7 +25,7 @@ def bin_search(list, n):
         else:
             start = mid+1
     return -1
-#5 Напишите функцию ```is_palindrome``` определяющую,является ли строка палиндромом. Палиндромами являются текстовые строки, которые одинаково читаются слева направо и справа налево. В строках не учитываются знаки препинания, пробельные символы и цифры; регистр не имеет значения. 
+#5
 
 def is_palindrome(x):
  x = len(word)
@@ -42,10 +42,11 @@ def is_palindrome(x):
     print("no")
  else:
     print("yes")
-#6 Написать функцию ```calculate```, которая принимает на вход текстовый файл содержащий строки следующего формата: etc
+
+# 6
 OPS = {'+': lambda x, y: x + y, '-': lambda x, y: x - y,
-       '*': lambda x, y: x * y, '//': lambda x, y: x//y,
-       '%': lambda x, y: x % y,  '**': lambda x, y: x ** y}
+       '*': lambda x, y: x * y, '//': lambda x, y: x // y,
+       '%': lambda x, y: x % y, '**': lambda x, y: x ** y}
 
 
 def load_file(filename):
@@ -73,25 +74,8 @@ def calculate(path2file):
     return ','.join(result)
 
 
-def main_():
-    data = calculate('test_input_file_1.txt')
-    print(data)
-
-
-main_()
-
-#7Написать функцию ```substring_slice```,которой на вход поступают два текстовых файла. 
-# - Первый файл содержит строки текста.   
-# - Второй файл содержит строки из двух целых неотрицательных чисел.
-#Первое число в строке всегда меньше или равно второму.
-#Числа всегда меньше длины соответствующей строки первого файла.
-#Соответствующей - это значит 1-ая строка из 1-го файла соответствует 1-ой строке из 2-го файла, а 123-я строка из 1-го файла соответствует 123-ей строке из 2-го файла.
-
-#- Функция должна вернуть строку, состоящую из подстрок 1-го входного файла.
-#Подстроки разделены пробелами.
-#Какие брать подстроки - написано во втором файле.
-#В конце файла пробела нет.
-def load_file(filename):
+# 7
+def load_file2(filename):
     file = open(filename, encoding='utf-8')
     data = [line for line in file.readlines()]
     file.close()
@@ -99,23 +83,25 @@ def load_file(filename):
 
 
 def substring_slice(path2file_1, path2file_2):
-    data_1 = load_file(path2file_1)
-    data_2 = load_file(path2file_2)
+    data_1 = load_file2(path2file_1)
+    data_2 = load_file2(path2file_2)
     result = []
     for line_1, line_2 in zip(data_1, data_2):
         start_index, end_index = map(int, line_2.strip().split())
         result.append(line_1[start_index:end_index + 1])
     return ' '.join(result)
-#8 Написать функцию ```decode_ch```,на вход которой поступает строка.В ней хранится набор химических символов (He, O, H, Mg, Fe, ...). Без пробелов. Нужно расшифровать химические символы в название химических элементов.Функция должна вернуть строку - расшифровку.
+
+
+# 8
 import json
 
 
-def decoded_ch(string_of_elements):
+def decode_ch(string_of_elements):
     periodic_table = json.load(open('periodic_table.json', encoding='utf-8'))
     search_index = 1
     result = ''
     while string_of_elements:
-        last_ch = string_of_elements[search_index:search_index + 1].isupper()\
+        last_ch = string_of_elements[search_index:search_index + 1].isupper() \
             if string_of_elements[search_index:search_index + 1] else True
         if string_of_elements[:search_index] in periodic_table and last_ch:
             result += periodic_table[string_of_elements[:search_index]]
@@ -125,21 +111,8 @@ def decoded_ch(string_of_elements):
             search_index += 1
     return result
 
-#9Создайте класс с названием Student.
-#При инициализации объекта подается два аргумента. Первый - имя студента. Второй - фамилия студента.
 
-#1. Создайте три атрибута объекта данного класса:
-
-#- *name* имя студента
-#- *surname* фамилия студента
-#- *fullname* имя и фамилия студента через пробел
-#2. Создайте метод для экземпляра класса Student под названием greeting, который при вызове возвращает строку Hello, I am Student
-#Здесь и далее нужно только написать сам класс. 
-#3. Добавьте новый атрибут класса под названием grades. При инициализации объекта соответственно добавляется новый аргумент, в котором будет лежать список оценок данного студента, по дефолту равный списку [3,4,5]. Создайте метод под названием mean_grade, который возвращает среднее всех оценок студента (то есть среднее этого атрибута).
-#4. Сделайте метод is_otlichnik, который возвращает строку YES, если средняя оценок студента больше или равна 4.5 и NO в противном случае.
-#Примечание: этот метод должен вызывать метод mean_grade внутри себя.
-#5. На этот раз определим операцию сложения для двух студентов. Пусть такая операция возвращает строку следующего вида: "Name1 is friends with Name2", где Name1 и Name2 - имена первого студента и второго (именно атрибут name). То есть, если создать два экземпляра класса Student, то их сумма должна вернуть вышеописанную строку.
-#6. Теперь переопределим поведение нашего класса с функцией print. Пусть при вызове функции print от экземпляра класса Student печатается его атрибут fullname.
+# 9
 class Student:
     def __init__(self, name, surname, grades=None):
         self.name = name
@@ -150,13 +123,13 @@ class Student:
         self.grades = grades
 
     def is_otlichnik(self):
-        return 'Yes' if self.mean_grades() >= 4.5 else 'NO'
+        return 'Yes' if self.mean_grade() >= 4.5 else 'NO'
 
     def greeting(self):
         return f'Hello, I am {self.fullname}'
 
-    def mean_grades(self):
-        return sum(self.grades)/len(self.grades)
+    def mean_grade(self):
+        return sum(self.grades) / len(self.grades)
 
     def __add__(self, other):
         return f'{self.name} is friends with {other.name}'
@@ -165,27 +138,8 @@ class Student:
         return self.fullname
 
 
-def main_1():
-    student_1 = Student('Bobb', 'Greeny', [4,5,5])
-    student_2 = Student('Stevee', 'Brrown')
-    print(student_1.greeting())
-    print(student_2)
-    print(student_1.is_otlichnik())
-    print(student_1 + student_2)
-
-
-main_1()
-
-#10
-
-#Определите  класс исключений ```MyError```,
- #который принимает строковое сообщение ```msg``` в качестве параметра при инициализации и также имеет атрибут ```msg```.
-
-#Подсказка: Чтобы определить кастомный класс  исключения,нужно создавать класс, унаследованный от ```Exception```.
+# 10
 class MyError(Exception):
     def __init__(self, msg):
         self.msg = msg
         super().__init__(msg)
-
-
-raise MyError('error')
